@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>D&D · Strife</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous">
+
+  <!-- Custom CSS -->
+  <style>
+    html {
+      position: relative;
+      min-height: 100%;
+    }
+
+    body {
+      margin-bottom: 12rem;
+      /* Margin bottom by footer height */
+    }
+
+    .ability-check {
+      height: 1.5rem;
+      margin-right: 0.4rem;
+    }
+
+    .ability-check-text {
+      height: 2rem;
+    }
+
+    ul {
+      padding-left: 1rem;
+    }
+
+    .card-body {
+      padding: 1.25rem !important;
+    }
+
+    .card-body p:last-child {
+      /* replaces .card-text:last-child, much easier and less cluttered */
+      margin-bottom: 0;
+    }
+
+    .info-button {
+      padding: 0 1.25rem 1.25rem 1.25rem;
+    }
+
+    .popover {
+      white-space: pre-line;
+    }
+
+    .stat {
+      display: inline-block;
+      padding: 0.25em 0.4em;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: 0.25rem;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      color: white;
+    }
+
+    .stat-str {
+      background-color: var(--red);
+    }
+
+    .stat-dex {
+      background-color: var(--green);
+    }
+
+    .stat-con {
+      background-color: var(--orange);
+    }
+
+    .stat-int {
+      background-color: var(--purple);
+    }
+
+    .stat-wis {
+      background-color: var(--blue);
+    }
+
+    .stat-cha {
+      background-color: var(--yellow);
+    }
+
+    .stat-prof {
+      background-color: var(--dark);
+    }
+
+    .stat-misc {
+      background-color: var(--dark);
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 12rem;
+      padding-top: 1rem;
+      background-color: #e9ecef;
+    }
+  </style>
+</head>
+
+<body>
+  <main role="main">
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="display-3">Strife</h1>
+        <p>Important info for playing D&D</p>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <h3>Important Info</h3>
+      <hr>
+
+      <div class="card-columns">
+
+        <!-- Ability Check -->
+        <div class="card mb-4">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item card-body">
+              <h4>Ability Check</h4>
+              <hr>
+              <p>Roll a <span class="stat stat-misc">d20</span> and add on the
+                specified ability modifier. If you're proficient in a skill, add
+                on your proficiency bonus.</p>
+
+              <p>For example, a Perception check utilises Wisdom, so a
+                Perception check would be:</p>
+
+              <p><span class="stat stat-misc">1d20</span> + <span
+                  class="stat stat-wis"></span></p>
+            </li>
+            <li class="list-group-item">
+              <h5>Types of Checks</h5>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Acrobatics</p>
+                </div>
+                <p><span class="stat stat-dex"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p>Animal Handling</p>
+                </div>
+                <p><span class="stat stat-wis"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" checked disabled>
+                  <p class="col-6-sm">Arcana</p>
+                </div>
+                <p><span class="stat stat-int"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Athletics</p>
+                </div>
+                <p><span class="stat stat-str"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Deception</p>
+                </div>
+                <p><span class="stat stat-cha"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" checked disabled>
+                  <p class="col-6-sm">History</p>
+                </div>
+                <p><span class="stat stat-int"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Insight</p>
+                </div>
+                <p><span class="stat stat-wis"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Intimidation</p>
+                </div>
+                <p><span class="stat stat-cha"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" checked disabled>
+                  <p class="col-6-sm">Investigation</p>
+                </div>
+                <p><span class="stat stat-int"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Medicine</p>
+                </div>
+                <p><span class="stat stat-wis"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Nature</p>
+                </div>
+                <p><span class="stat stat-int"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Perception</p>
+                </div>
+                <p><span class="stat stat-wis"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Performance</p>
+                </div>
+                <p><span class="stat stat-cha"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" checked disabled>
+                  <p class="col-6-sm">Persuasion</p>
+                </div>
+                <p><span class="stat stat-cha"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Religion</p>
+                </div>
+                <p><span class="stat stat-int"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Sleight of Hand</p>
+                </div>
+                <p><span class="stat stat-dex"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Stealth</p>
+                </div>
+                <p><span class="stat stat-dex"></span></p>
+              </div>
+
+              <div class="d-flex justify-content-between ability-check-text">
+                <div class="d-inline-flex">
+                  <input type="radio" class="ability-check" disabled>
+                  <p class="col-6-sm">Survival</p>
+                </div>
+                <p><span class="stat stat-wis"></span></p>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+
+        <!-- Link to level up table -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <a class="btn btn-block btn-primary"
+              href="https://www.dndbeyond.com/classes/warlock#TheWarlockTable">Warlock
+              Level-Up Table</a>
+          </div>
+        </div>
+
+        <!-- Proficiency Bonus -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4>Proficiency Bonus</h4>
+            <hr>
+            <p>For level 1-4, <span class="stat stat-misc">+2</span></p>
+            <p>For level 5-8, <span class="stat stat-misc">+3</span></p>
+            <p>For level 9-12, <span class="stat stat-misc">+4</span></p>
+            <p>For level 13-16, <span class="stat stat-misc">+5</span></p>
+            <p>For level 17-20, <span class="stat stat-misc">+6</span></p>
+          </div>
+        </div>
+
+        <!-- Passive Perception -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4>Passive Perception</h4>
+            <hr>
+            <p>Passive Perception is used whenever you're not actively searching
+              for something, like utilising a perception check. As an exampe, a
+              character of stealth level 11 would be seen instantly by a
+              character with a passive perception of 12.</p>
+            <p>To calculate, it's 10 + <span class="stat stat-wis"></span> +
+              <span class="stat stat-prof"></span></p>
+          </div>
+        </div>
+
+        <!-- Saving Throw -->
+        <div class="card mb-4">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item card-body">
+              <h4>Saving Throw</h4>
+              <hr>
+              <p>Much like an ability check, a Saving Throw involves rolling a
+                <span class="stat stat-misc">d20</span> and adding the
+                appropriate modifier, and a 2 if you have proficiency.</p>
+            </li>
+            <li class="list-group-item mt-2">
+              <div class="w-100 d-inline-flex">
+                <input type="radio" class="ability-check" disabled>
+                <span class="stat stat-str"></span>
+              </div>
+              <div class="w-100 d-inline-flex">
+                <input type="radio" class="ability-check" disabled>
+                <span class="stat stat-dex"></span>
+              </div>
+              <div class="w-100 d-inline-flex">
+                <input type="radio" class="ability-check" disabled>
+                <span class="stat stat-con"></span>
+              </div>
+              <div class="w-100 d-inline-flex">
+                <input type="radio" class="ability-check" disabled>
+                <span class="stat stat-int"></span>
+              </div>
+              <div class="w-100 d-inline-flex">
+                <input type="radio" class="ability-check" checked disabled>
+                <span class="stat stat-wis"></span>
+              </div>
+              <div class="w-100 d-inline-flex">
+                <input type="radio" class="ability-check" checked disabled>
+                <span class="stat stat-cha"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Features and Traits -->
+        <div class="card mb-4">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item card-body">
+              <h4>Features and Traits</h4>
+            </li>
+            <li class="list-group-item card-body">
+              <h5>Hexblade's Curse</h5>
+              <p>Allows use of the Hexblade's Curse feature spell.</p>
+            </li>
+            <li class="list-group-item card-body">
+              <h5>Position of Privilege</h5>
+              <p>People treat you as a noble! Other nobles treat you well, and
+                the common folk accomodate you. You can secure an audience with
+                a local noble.</p>
+            </li>
+            <li class="list-group-item card-body">
+              <h5>Hex Warrior</h5>
+              <p>Any single weapon of my choosing between long rests gets to use
+                <span class="stat stat-cha"></span> rather than <span
+                  class="stat stat-str"></span> or <span
+                  class="stat stat-dex"></span></p>
+            </li>
+            <li class="list-group-item card-body">
+              <h5>Otherworldly Patron</h5>
+              <p>Any single weapon of my choosing between long rests gets to use
+                <span class="stat stat-cha"></span> rather than <span
+                  class="stat stat-str"></span> or <span
+                  class="stat stat-dex"></span></p>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Eldritch Invocations -->
+        <div class="card mb-4">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item card-body">
+              <h4>Eldritch Invocations</h4>
+            </li>
+            <li class="list-group-item card-body">
+              <h5>Agonizing Blast</h5>
+              <p>When you cast eldritch blast, add your Charisma modifier to the
+                damage it deals on a hit.</p>
+            </li>
+            <li class="list-group-item card-body">
+              <h5>Armor of Shadows</h5>
+              <p>You can cast mage armor on yourself at will, without expending
+                a spell slot or material components.</p>
+              <p>AC becomes 13 + <span class="stat stat-dex"></span></p>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <h4>Physical Actions</h4>
+      <hr>
+
+      <div class="card-columns">
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Slice with Rapier</h5>
+            <hr>
+            <p>To Hit: <span class="stat stat-misc">1d20</span> + <span
+                class="stat stat-cha"></span>
+            </p>
+            <p>Damage: <span class="stat stat-misc">1d8</span> + <span
+                class="stat stat-cha"></span>
+            </p>
+            <p>Costs 1 Action</p>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Stab with Dagger</h5>
+            <hr>
+            <p>To Hit: <span class="stat stat-misc">1d20</span> + <span
+                class="stat stat-dex"></span> or <span
+                class="stat stat-str"></span>
+            </p>
+            <p>Damage: <span class="stat stat-misc">1d4</span> + <span
+                class="stat stat-dex"></span> or <span class="stat stat-str">
+            </p>
+            <p>Costs 1 Action</p>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Dash</h5>
+            <hr>
+            <p>Double your movement at the cost of an action.</p>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Disengage</h5>
+            <hr>
+            <p>An action that prevents opportunity attacks for the turn.</p>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Dodge</h5>
+            <hr>
+            <p>Until the next turn, any attack roll against you has
+              disadvantage if you can see the attacker.</p>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Help</h5>
+            <hr>
+            <p>The target of your help action gains advantage on a check until
+              your next turn. Alternately, you can give advantage to any ally
+              attacking anything within 5 feet of you until your next turn.
+            </p>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Disengage</h5>
+            <hr>
+            <p>An action that prevents opportunity attacks for the turn.</p>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Hide</h5>
+            <hr>
+            <p>Make a Stealth check in an attempt to hide. Success results in
+              stealth, giving
+              advantage on an enemy that can't see you.</p>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Ready</h5>
+            <hr>
+            <p>Set up a trigger that results in an action after a condition is
+              met. For
+              example, "If the goblin steps next to me, I move away."</p>
+          </div>
+        </div>
+
+      </div>
+
+      <h4>Cantrips</h4>
+      <hr>
+
+      <div class="card-columns">
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Eldritch Blast</h5>
+            <span class="badge badge-success">Learned</span>
+            <hr>
+            <p>To Hit: <span class="stat stat-misc">1d20</span> + <span
+                class="stat stat-cha"></span> + <span
+                class="stat stat-prof"></span></p>
+            <p>Damage: <span class="stat stat-misc">1d10</span> + <span
+                class="stat stat-cha"></span></p>
+            <p>Costs 1 action</p>
+          </div>
+
+          <div class="info-button">
+            <a tabindex="0" class="btn btn-sm btn-block btn-light" role="button"
+              data-toggle="popover" data-trigger="focus" title="Eldritch Blast"
+              data-placement="bottom" data-content="Casting Time: 1 action
+                  Components: V S
+                  Duration: Instantaneous
+                  Level: 0
+                  Name: Eldritch Blast
+                  Range: 120 feet
+                  School: Evocation
+                  Spell Attack: Ranged
+                  Target: A creature within range
+                  ">Full Attributes</a>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Minor Illusion</h5>
+            <span class="badge badge-success">Learned</span>
+            <hr>
+            <p>Create a sound or an image of an object within range that lasts
+              for the Duration. The Illusion also ends if you dismiss it as an
+              action or cast this spell again.</p>
+            <p>Costs 1 action</p>
+          </div>
+          <div class="info-button">
+            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
+              role="button" data-toggle="popover" data-trigger="focus"
+              title="Minor Illusion" data-placement="bottom" data-content="Casting Time: 1 action
+                  Components: S M
+                  Duration: 1 minute
+                  Level: 0
+                  Material: A bit of fleece
+                  Name: Minor Illusion
+                  Range: 30 feet
+                  School: Illusion
+                  Target: See text
+                  ">Full Attributes</a>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Prestidigitation</h5>
+            <span class="badge badge-info">Spellbook</span>
+            <hr>
+            <p>With this spell, perform one of the following:</p>
+
+            <ul>
+              <li>An Instantaneous, harmless sensory Effect.</li>
+              <li>Light or snuff out a small flame.</li>
+              <li>Clean or dirty an object no larger than 1 cubic foot.</li>
+              <li>Chill, warm, or flavor up to 1 cubic foot of nonliving
+                material for 1 hour.</li>
+              <li>Make a small mark, color, or symbol appear on an object or
+                surface for 1 hour.</li>
+              <li>Produce a nonmagical trinket or illusory image the size of
+                your hand for 1 turn.</li>
+            </ul>
+
+            <p>You can have up to three of this spell's effects active at
+              once.
+              Dismissing an effect costs an action.</p>
+            <p>Costs 1 action</p>
+          </div>
+          <div class="info-button">
+            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
+              role="button" data-toggle="popover" data-trigger="focus"
+              title="Prestidigitation" data-placement="bottom" data-content="Casting Time: 1 action
+                  Components: V S
+                  Duration: Up to 1 hour
+                  Level: 0
+                  Name: Prestidigitation
+                  Range: 10 feet
+                  School: Transmutation
+                  Target: See text
+                  ">Full Attributes</a>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Message</h5>
+            <span class="badge badge-info">Spellbook</span>
+            <hr>
+            <p>You point your finger toward a creature within range and
+              Whisper
+              a message. The target (and only the target) hears the message
+              and
+              can reply in a Whisper that only you can hear.</p>
+            <p>Costs 1 action</p>
+          </div>
+          <div class="info-button">
+            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
+              role="button" data-toggle="popover" data-trigger="focus"
+              title="Message" data-placement="bottom" data-content="Casting Time: 1 action
+                  Components: V S M
+                  Duration: 1 round
+                  Level: 0
+                  Material: A short piece of copper wire
+                  Name: Message
+                  Range: 120 feet
+                  School: Transmutation
+                  Target: A creature within range
+                  ">Full Attributes</a>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Guidance</h5>
+            <span class="badge badge-info">Spellbook</span>
+            <hr>
+            <p>For a minute, any target touched by you gets an extra d4 to any
+              ability check, rolled before or after the check.</p>
+            <p>Costs 1 action</p>
+          </div>
+          <div class="info-button">
+            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
+              role="button" data-toggle="popover" data-trigger="focus"
+              title="Guidance" data-placement="bottom" data-content="Casting Time: 1 action
+                  Components: V S
+                  Concentration: Yes
+                  Duration: Up to 1 minute
+                  Level: 0
+                  Name: Guidance
+                  Range: Touch
+                  School: Divination
+                  Target: One willing creature
+                  ">Full Attributes</a>
+          </div>
+        </div>
+
+      </div>
+
+      <h4>Level 1 Spells</h4>
+      <hr>
+      <div class="mb-4">
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input level-1-slots"
+            disabled>
+          <label class="form-check-label">Slot 1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input level-1-slots"
+            disabled>
+          <label class="form-check-label">Slot 2</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input level-1-slots"
+            disabled>
+          <label class="form-check-label">Slot 3</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input level-1-slots"
+            disabled>
+          <label class="form-check-label">Slot 4</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input level-1-slots"
+            disabled>
+          <label class="form-check-label">Slot 5</label>
+        </div>
+      </div>
+
+      <div class="card-columns">
+
+        <!--
+          old spells, unused
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Hex</h5>
+            <hr>
+            <p>Place a curse on any visible creature within range. Until the
+              spell ends, you deal an extra <span
+                class="stat stat-misc">1d6</span> of necrotic damage whenever
+              you hit with an attack.</p>
+            <p>Additionally, choose a check type for the target to gain
+              disadvantage on.</p>
+            <p>When the target HP drops to 0, use a bonus action to move the
+              curse to a new target.</p>
+            <p>Costs 1 bonus action.</p>
+          </div>
+          <div class="info-button">
+            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
+              role="button" data-toggle="popover" data-trigger="focus"
+              title="Hex" data-placement="bottom" data-content="Casting Time: 1 bonus action
+                    Range: 90 feet
+                    Components: V, S, M (the petrified eye of a newt)
+                    Duration: Concentration, up to 1 hour
+                    ">Full Attributes</a>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Wrathful Smite</h5>
+            <hr>
+            <p>For the next minute, any melee attacks you hit on the target of
+              this spell do an extra <span class="stat stat-misc">1d6</span>
+              of
+              psychic damage.</p>
+            <p>When hitting a living target, they must make a Wisdom saving
+              throw to avoid being frightened for the duration of the spell.
+            </p>
+            <p>Costs 1 bonus action.</p>
+          </div>
+          <div class="info-button">
+            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
+              role="button" data-toggle="popover" data-trigger="focus"
+              title="Wrathful Smite" data-placement="bottom" data-content="Casting Time: 1 bonus action
+                  Range: Self
+                  Components: V
+                  Duration: Concentration, up to 1 minute
+                  ">Full Attributes</a>
+          </div>
+        </div>
+        -->
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Shield</h5>
+            <hr>
+            <p>Gain a +5 bonus to AC until your next turn. Negates all damage
+              from Magic Missile.</p>
+            <p>Cast as a reaction.</p>
+          </div>
+          <div class="info-button">
+            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
+              role="button" data-toggle="popover" data-trigger="focus"
+              title="Shield" data-placement="bottom" data-content="Casting Time: 1 reaction, which you take when you are hit by an attack or targeted by the Magic Missile spell
+                  Range: Self
+                  Components: V, S
+                  Duration: 1 round
+                  ">Full Attributes</a>
+          </div>
+        </div>
+
+      </div>
+
+      <h4>Level 2 Spells</h4>
+      <hr>
+      <div class="mb-4">
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input level-1-slots">
+          <label class="form-check-label">Slot 1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input level-1-slots">
+          <label class="form-check-label">Slot 2</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input level-1-slots"
+            disabled>
+          <label class="form-check-label">Slot 3</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input level-1-slots"
+            disabled>
+          <label class="form-check-label">Slot 4</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input level-1-slots"
+            disabled>
+          <label class="form-check-label">Slot 5</label>
+        </div>
+      </div>
+
+      <div class="card-columns">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Invisibility</h5>
+            <hr>
+            <p>For each spell slot level, by touch, make one creature and
+              everything they're carrying invisible for up to an hour. Attacking
+              or casting a spell ends the invisibility.</p>
+            <p>Costs 1 action.</p>
+          </div>
+          <div class="info-button">
+            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
+              role="button" data-toggle="popover" data-trigger="focus"
+              title="Invisibility" data-placement="bottom" data-content="Casting Time: 1 action
+                  Range: Touch
+                  Components: V, S, M (an eyelash encased in gum arabic)
+                  Duration: Concentration, up to 1 hour
+                  ">Full Attributes</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Suggestion</h5>
+            <hr>
+            <p>Target someone and make them follow a command (about a sentence
+              or two) if they fail a Wisdom save. The spell ends if they
+              complete the task. You can also set up a trigger with this.</p>
+            <p>Costs 1 action.</p>
+          </div>
+          <div class="info-button">
+            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
+              role="button" data-toggle="popover" data-trigger="focus"
+              title="Suggestion" data-placement="bottom" data-content="Casting Time: 1 action
+                  Range: 30 feet
+                  Components: V, M (a snake’s tongue and either a bit of honeycomb or a drop of sweet oil)
+                  Duration: Concentration, up to 8 hours
+                  ">Full Attributes</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Hold Person</h5>
+            <hr>
+            <p>The target must make a Wisdom saving throw. If they fail, they're
+              <a
+                href="https://roll20.net/compendium/dnd5e/Conditions#toc_9">paralyzed</a>.
+              Every turn they take while paralysed, they get to make another
+              saving throw to end the paralysis.</p>
+            <p>Costs 1 action.</p>
+          </div>
+          <div class="info-button">
+            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
+              role="button" data-toggle="popover" data-trigger="focus"
+              title="Hold Person" data-placement="bottom" data-content="Casting Time: 1 action
+                  Range: 60 feet
+                  Components: V, S, M (a small, straight piece of iron)
+                  Duration: Concentration, up to 1 minute
+                  ">Full Attributes</a>
+          </div>
+        </div>
+
+      </div>
+
+      <h4>Special Spells</h4>
+      <hr>
+      <div class="card-columns">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Hexblade's Curse</h5>
+            <span class="badge badge-warning">Feature</span>
+            <hr>
+            <p>Place a curse on any enemy within 30 feet, which lasts for a
+              minute. Until the curse ends, you gain the following benefits:</p>
+            <p>You can use <span class="stat stat-prof"></span> to
+              damage rolls against the target.</p>
+            <p>Any attack roll you make on the cursed target is a critical hit
+              at a roll of 19 or 20</p>
+            <p>If your target dies, you regain HP equal to your level plus <span
+                class="stat stat-cha"></span></p>
+            <p>You can only use this once per rest.</p>
+            <p>Costs 1 bonus action</p>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+    </div>
+    <!-- End of container -->
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">sorry the footer is empty atm</span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Javascript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+  <!-- Page Script -->
+  <script>
+    // Popover Initialisation
+
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+
+    $('.popover-dismiss').popover({
+      trigger: 'focus'
+    })
+
+    // Stat Text Replacement
+
+    /*
+      not the neatest code ever but...
+
+      it works.
+    */
+
+    var stats = {
+      "str": 11,
+      "dex": 15,
+      "con": 12,
+      "int": 13,
+      "wis": 8,
+      "cha": 17
+    }
+
+    let level = 3
+
+    var iStats = {
+      "str": "+0",
+      "dex": "+2",
+      "con": "+1",
+      "int": "+1",
+      "wis": "-1",
+      "cha": "+3",
+      "prof": "+2"
+    }
+
+    for (var key in stats) {
+      let temp = Math.floor((stats[key] - 10) / 2);
+
+      if (temp > 0) {
+        iStats[key] = "+" + temp.toString();
+      } else {
+        iStats[key] = temp.toString();
+      }
+    }
+
+    iStats["prof"] = "+" + Math.floor((7 + level) / 4).toString();
+
+    for (var key in iStats) {
+      var i = iStats[key];
+
+      $(".stat-" + key).map(function () {
+        this.innerHTML = key + " (" + i + ")";
+      })
+    }
+  </script>
+
+</body>
+
+</html>

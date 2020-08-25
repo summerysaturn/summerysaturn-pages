@@ -132,8 +132,9 @@
       <h2>Dice Roller</h2>
       <p><span class="text-muted">Click a button to roll</span></p>
 
-      <div class="w-100 justify-content-center d-flex mb-1">
-        <h1 style="font-size: 144px;" id="rollText">-</h1>
+      <div class="justify-content-center d-flex" style="height: 200px;">
+        <h1 style="font-size: 144px;" id="rollText"><span
+            class="text-muted">(click a button)</span></h1>
       </div>
 
       <div class="btn-group w-100 mb-5">
@@ -163,6 +164,12 @@
           </div>D20
         </button>
       </div>
+
+      <!--
+      <hr>
+      <h3>Character Stats</h3>\
+      <br>
+      -->
 
       <hr>
       <h3>Important Info</h3>
@@ -485,7 +492,8 @@
             <h5 class="card-title">Slice with Rapier</h5>
             <hr>
             <p>To Hit: <span class="stat stat-misc">1d20</span> + <span
-                class="stat stat-cha"></span>
+                class="stat stat-cha"></span>+ <span
+                class="stat stat-prof"></span>
             </p>
             <p>Damage: <span class="stat stat-misc">1d8</span> + <span
                 class="stat stat-cha"></span>
@@ -499,11 +507,11 @@
             <h5 class="card-title">Stab with Dagger</h5>
             <hr>
             <p>To Hit: <span class="stat stat-misc">1d20</span> + <span
-                class="stat stat-dex"></span> or <span
-                class="stat stat-str"></span>
+                class="stat stat-dex"></span> + <span
+                class="stat stat-prof"></span>
             </p>
             <p>Damage: <span class="stat stat-misc">1d4</span> + <span
-                class="stat stat-dex"></span> or <span class="stat stat-str">
+                class="stat stat-dex"></span>
             </p>
             <p>Costs 1 Action</p>
           </div>
@@ -762,58 +770,6 @@
 
       <div class="card-columns">
 
-        <!--
-          old spells, unused
-        <div class="card mb-4">
-          <div class="card-body">
-            <h5 class="card-title">Hex</h5>
-            <hr>
-            <p>Place a curse on any visible creature within range. Until the
-              spell ends, you deal an extra <span
-                class="stat stat-misc">1d6</span> of necrotic damage whenever
-              you hit with an attack.</p>
-            <p>Additionally, choose a check type for the target to gain
-              disadvantage on.</p>
-            <p>When the target HP drops to 0, use a bonus action to move the
-              curse to a new target.</p>
-            <p>Costs 1 bonus action.</p>
-          </div>
-          <div class="info-button">
-            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
-              role="button" data-toggle="popover" data-trigger="focus"
-              title="Hex" data-placement="bottom" data-content="Casting Time: 1 bonus action
-                    Range: 90 feet
-                    Components: V, S, M (the petrified eye of a newt)
-                    Duration: Concentration, up to 1 hour
-                    ">Full Attributes</a>
-          </div>
-        </div>
-
-        <div class="card mb-4">
-          <div class="card-body">
-            <h5 class="card-title">Wrathful Smite</h5>
-            <hr>
-            <p>For the next minute, any melee attacks you hit on the target of
-              this spell do an extra <span class="stat stat-misc">1d6</span>
-              of
-              psychic damage.</p>
-            <p>When hitting a living target, they must make a Wisdom saving
-              throw to avoid being frightened for the duration of the spell.
-            </p>
-            <p>Costs 1 bonus action.</p>
-          </div>
-          <div class="info-button">
-            <a tabindex=" 0" class="btn btn-sm btn-block btn-light"
-              role="button" data-toggle="popover" data-trigger="focus"
-              title="Wrathful Smite" data-placement="bottom" data-content="Casting Time: 1 bonus action
-                  Range: Self
-                  Components: V
-                  Duration: Concentration, up to 1 minute
-                  ">Full Attributes</a>
-          </div>
-        </div>
-        -->
-
         <div class="card mb-4">
           <div class="card-body">
             <h5 class="card-title">Shield</h5>
@@ -1001,7 +957,7 @@
       it works.
     */
 
-    var stats = {
+    let stats = {
       "str": 11,
       "dex": 15,
       "con": 12,
@@ -1010,37 +966,25 @@
       "cha": 17
     }
 
-    let level = 3
-
-    var iStats = {
-      "str": "+0",
-      "dex": "+2",
-      "con": "+1",
-      "int": "+1",
-      "wis": "-1",
-      "cha": "+3",
-      "prof": "+2"
-    }
+    let level = 3;
 
     for (var key in stats) {
-      let temp = Math.floor((stats[key] - 10) / 2);
+      let statMod = Math.floor((stats[key] - 10) / 2);
 
-      if (temp > 0) {
-        iStats[key] = "+" + temp.toString();
+      if (statMod >= 0) {
+        temp = "+" + statMod.toString();
       } else {
-        iStats[key] = temp.toString();
+        temp = statMod.toString();
       }
-    }
-
-    iStats["prof"] = "+" + Math.floor((7 + level) / 4).toString();
-
-    for (var key in iStats) {
-      var i = iStats[key];
 
       $(".stat-" + key).map(function () {
-        this.innerHTML = key + " (" + i + ")";
-      })
+        this.innerHTML = key + " (" + temp + ")";
+      });
     }
+
+    $(".stat-prof").map(function () {
+      this.innerHTML = "prof +" + Math.floor((7 + level) / 4).toString();
+    })
 
     function roll(val) {
       $("#rollText").html(Math.floor((Math.random() * val) + 1).toString());

@@ -9,6 +9,10 @@
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet"
+    href="https://bootswatch.com/4/cyborg/bootstrap.min.css"
+    crossorigin="anonymous" disabled>
+
+  <link rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
     crossorigin="anonymous">
@@ -106,7 +110,7 @@
       width: 100%;
       height: 12rem;
       padding-top: 1rem;
-      background-color: #e9ecef;
+      background-color: #282828;
     }
   </style>
 </head>
@@ -124,47 +128,45 @@
 
     <div class="container">
 
-      <div class="card mb-5">
-        <div style="height: 500px;">
+      <hr>
+      <h2>Dice Roller</h2>
+      <p><span class="text-muted">Click a button to roll</span></p>
 
-          <div class="w-100 justify-content-center d-flex">
-            <h1 class="display-1">20</h1>
-          </div>
-
-
-          <div class="row">
-            <button class="col-sm btn btn-lg btn-primary">
-              <div class="w-100"><img src="img/d4.png" class="" alt="D4">
-              </div>
-              D4
-            </button>
-            <button class="col-sm btn btn-lg btn-primary">
-              <div class="w-100"><img src="img/d6.png" class="" alt="D6">
-              </div>D6
-            </button>
-            <button class="col-sm btn btn-lg btn-primary">
-              <div class="w-100"><img src="img/d8-d10.png" class="" alt="D8">
-              </div>D8
-            </button>
-            <button class="col-sm btn btn-lg btn-primary">
-              <div class="w-100"><img src="img/d8-d10.png" class="" alt="D10">
-              </div>D10
-            </button>
-            <button class="col-sm btn btn-lg btn-primary">
-              <div class="w-100"><img src="img/d12.png" class="" alt="D12">
-              </div>D12
-            </button>
-            <button class="col-sm btn btn-lg btn-primary">
-              <div class="w-100"><img src="img/d20.png" class="" alt="D20">
-              </div>D20
-            </button>
-          </div>
-
-        </div>
+      <div class="w-100 justify-content-center d-flex mb-1">
+        <h1 style="font-size: 144px;" id="rollText">-</h1>
       </div>
 
-      <h3>Important Info</h3>
+      <div class="btn-group w-100 mb-5">
+        <button class="col-sm btn btn-lg btn-dark" onclick="roll(4)">
+          <div class="w-100"><img src="img/d4.png" alt="D4">
+          </div>
+          D4
+        </button>
+        <button class="col-sm btn btn-lg btn-dark" onclick="roll(6)">
+          <div class="w-100"><img src="img/d6.png" alt="D6">
+          </div>D6
+        </button>
+        <button class="col-sm btn btn-lg btn-dark" onclick="roll(8)">
+          <div class="w-100"><img src="img/d8-d10.png" alt="D8">
+          </div>D8
+        </button>
+        <button class="col-sm btn btn-lg btn-dark" onclick="roll(10)">
+          <div class="w-100"><img src="img/d8-d10.png" alt="D10">
+          </div>D10
+        </button>
+        <button class="col-sm btn btn-lg btn-dark" onclick="roll(12)">
+          <div class="w-100"><img src="img/d12.png" alt="D12">
+          </div>D12
+        </button>
+        <button class="col-sm btn btn-lg btn-dark" onclick="roll(20)">
+          <div class="w-100"><img src="img/d20.png" alt="D20">
+          </div>D20
+        </button>
+      </div>
+
       <hr>
+      <h3>Important Info</h3>
+      <br>
 
       <div class="card-columns">
 
@@ -573,8 +575,9 @@
 
       </div>
 
-      <h4>Cantrips</h4>
       <hr>
+      <h4>Cantrips</h4>
+      <br>
 
       <div class="card-columns">
 
@@ -727,8 +730,8 @@
 
       </div>
 
-      <h4>Level 1 Spells</h4>
       <hr>
+      <h4>Level 1 Spells</h4>
       <div class="mb-4">
         <div class="form-check form-check-inline">
           <input type="checkbox" class="form-check-input level-1-slots"
@@ -832,8 +835,8 @@
 
       </div>
 
-      <h4>Level 2 Spells</h4>
       <hr>
+      <h4>Level 2 Spells</h4>
       <div class="mb-4">
         <div class="form-check form-check-inline">
           <input type="checkbox" class="form-check-input level-1-slots">
@@ -928,8 +931,10 @@
 
       </div>
 
-      <h4>Special Spells</h4>
       <hr>
+      <h4>Special Spells</h4>
+      <br>
+
       <div class="card-columns">
         <div class="card mb-4">
           <div class="card-body">
@@ -1035,6 +1040,10 @@
       $(".stat-" + key).map(function () {
         this.innerHTML = key + " (" + i + ")";
       })
+    }
+
+    function roll(val) {
+      $("#rollText").html(Math.floor((Math.random() * val) + 1).toString());
     }
   </script>
 

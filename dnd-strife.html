@@ -134,7 +134,7 @@
 
       <div class="justify-content-center d-flex" style="height: 200px;">
         <h1 style="font-size: 144px;" id="rollText"><span
-            class="text-muted">(click a button)</span></h1>
+            class="text-muted"></span></h1>
       </div>
 
       <div class="btn-group w-100 mb-5">
@@ -165,11 +165,9 @@
         </button>
       </div>
 
-      <!--
       <hr>
-      <h3>Character Stats</h3>\
+      <h3>Character Stats</h3>
       <br>
-      -->
 
       <hr>
       <h3>Important Info</h3>
@@ -522,14 +520,6 @@
             <h5 class="card-title">Dash</h5>
             <hr>
             <p>Double your movement at the cost of an action.</p>
-          </div>
-        </div>
-
-        <div class="card mb-4">
-          <div class="card-body">
-            <h5 class="card-title">Disengage</h5>
-            <hr>
-            <p>An action that prevents opportunity attacks for the turn.</p>
           </div>
         </div>
 
@@ -949,13 +939,13 @@
       trigger: 'focus'
     })
 
-    // Stat Text Replacement
+    // Various Functions
 
-    /*
-      not the neatest code ever but...
+    function roll(val) {
+      $("#rollText").html(Math.floor((Math.random() * val) + 1).toString());
+    }
 
-      it works.
-    */
+    // Stats script
 
     let stats = {
       "str": 11,
@@ -983,12 +973,8 @@
     }
 
     $(".stat-prof").map(function () {
-      this.innerHTML = "prof +" + Math.floor((7 + level) / 4).toString();
+      this.innerHTML = "prof (+" + Math.floor((7 + level) / 4).toString() + ")";
     })
-
-    function roll(val) {
-      $("#rollText").html(Math.floor((Math.random() * val) + 1).toString());
-    }
   </script>
 
 </body>

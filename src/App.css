@@ -1,12 +1,19 @@
 .App-logo {
-  height: 40vmin;
+  height: 35vmin;
+  max-height: 1440px;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App-Title {
+  font-size: 10vmin;
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.page {
+  height: 70vh;
 }
 
 .App-header {
@@ -18,15 +25,6 @@
   align-items: center;
   justify-content: center;
   color: white;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 svg {

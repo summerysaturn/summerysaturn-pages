@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './logo.png';
 
 import {
   Button, Card, Container, Badge
@@ -130,11 +130,11 @@ class RepoCard extends React.Component {
         <a href={this.props.repoData.html_url} className="text-reset">
 
           {this.state.img &&
-            <img src={this.state.img} className="card-img-top" />
+            <img src={this.state.img} className="card-img-top" alt={this.props.repoData.name} />
           }
 
           {!this.state.img &&
-            <img src={process.env.PUBLIC_URL + "/placeholder.png"} className="card-img-top" />
+            <img src={process.env.PUBLIC_URL + "/placeholder.png"} className="card-img-top" alt={this.props.repoData.name} />
           }
 
           <Card.Body>
@@ -164,7 +164,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+
+        <div className="position-relative">
+          <img src={logo} className="App-logo" alt="Logo" />
+          <h1 className="display-1 App-Title font-weight-bold">summerysaturn</h1>
+        </div>
+
         <h2>
           This page is under development!
         </h2>

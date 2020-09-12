@@ -20,12 +20,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +30,24 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+svg {
+  vertical-align: top !important;
+}
+
+.socialButton {
+  height: 30px;
+}
+
+.socialButton svg {
+  position: relative;
+  top: 0px;
+  color: white;
+  width: 30px;
+  height: 30px;
+}
+
+.socialButton svg:hover {
+  color: lightgrey;
 }

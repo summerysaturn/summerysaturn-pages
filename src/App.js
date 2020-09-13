@@ -9,6 +9,10 @@ import {
   FaInstagram, FaTwitter, FaGithub
 } from 'react-icons/fa';
 
+import {
+  GiCoffeeCup
+} from 'react-icons/gi'
+
 import './App.css';
 
 var seedrandom = require('seedrandom');
@@ -33,6 +37,11 @@ class SocialButtons extends React.Component {
         name: "GitHub",
         icon: <FaGithub />,
         url: "https://github.com/summerysaturn"
+      },
+      {
+        name: "Ko-Fi",
+        icon: <GiCoffeeCup />,
+        url: "https://ko-fi.com/summerysaturn"
       }
     ]
   }

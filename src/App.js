@@ -15,7 +15,6 @@ var seedrandom = require('seedrandom');
 var convert = require('color-convert');
 
 class SocialButtons extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -46,8 +45,7 @@ class SocialButtons extends React.Component {
             {e.icon}
             <span className="sr-only"> {e.name} Link</span>
           </SocialButton >
-        )
-        }
+        )}
       </div>
     )
   }
@@ -67,7 +65,6 @@ class SocialButton extends React.Component {
 }
 
 class RepoDisplay extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = { restData: [] }
@@ -95,7 +92,6 @@ class RepoDisplay extends React.Component {
 }
 
 class RepoCard extends React.Component {
-
   constructor(props) {
     super(props);
     this.url = "";
@@ -119,7 +115,6 @@ class RepoCard extends React.Component {
   }
 
   render() {
-
     function getColour(string) {
       let hue = seedrandom(string).quick();
       return convert.hsl.hex(hue * 360, 100, 50);
@@ -128,20 +123,16 @@ class RepoCard extends React.Component {
     return (
       <Card>
         <a href={this.props.repoData.html_url} className="text-reset">
-
           {this.state.img &&
             <img src={this.state.img} className="card-img-top" alt={this.props.repoData.name} />
           }
-
           {!this.state.img &&
             <img src={process.env.PUBLIC_URL + "/placeholder.png"} className="card-img-top" alt={this.props.repoData.name} />
           }
-
           <Card.Body>
             <Card.Text>
               <h6>{this.props.repoData.name}</h6>
               <p>{this.props.repoData.description}</p>
-
               <Badge
                 style={{
                   color: "white",
@@ -150,12 +141,22 @@ class RepoCard extends React.Component {
               >
                 {this.props.repoData.language}
               </Badge>
-
             </Card.Text>
           </Card.Body>
-
         </a>
       </Card >
+    )
+  }
+}
+
+class Heading extends React.Component {
+  render() {
+    return (
+      <>
+        <div class="hr">
+          <hr data-content={this.props.children} class="hr-text" />
+        </div>
+      </>
     )
   }
 }
@@ -201,7 +202,7 @@ function App() {
       </header>
 
       <Container className="mb-5">
-        <h1 className="mt-5 mb-5">My Repositories</h1>
+        <Heading>My Repositories</Heading>
         <RepoDisplay />
       </Container>
 

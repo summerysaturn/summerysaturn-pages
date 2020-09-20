@@ -16,7 +16,13 @@ import {
 import './App.css';
 
 var seedrandom = require('seedrandom');
-var convert = require('color-convert');
+var hsluv = require('hsluv');
+
+function colorHash(string) {
+  let hue = seedrandom(string).quick();
+  console.log(hsluv);
+  return hsluv.hsluvToHex([hue * 360, 80, 65]);
+}
 
 class SocialButtons extends React.Component {
   constructor(props) {
@@ -52,10 +58,70 @@ class SocialButtons extends React.Component {
         {this.Links.map(e =>
           <SocialButton url={e.url}>
             {e.icon}
-            <span className="sr-only"> {e.name} Link</span>
+            <span className="sr-only">{e.name} Link</span>
           </SocialButton >
         )}
       </div>
+    )
+  }
+}
+
+class Heading extends React.Component {
+  render() {
+    return (
+      <div className="hr">
+        <hr data-content={this.props.children} className="hr-text" />
+      </div>
+    )
+  }
+}
+
+class LanguageDisplay extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.languages = [
+      "Git",
+      "Shell",
+      "*nix",
+      "Java",
+      "C#",
+      "Python",
+      "Lua",
+      "LÖVE",
+      "JavaScript",
+      "jQuery",
+      "NodeJS",
+      "ReactJS",
+      "Unity3D"
+    ];
+  }
+
+  render() {
+    return (
+      <h2>
+        {
+          this.languages.map(e =>
+            <LanguageBadge>{e}</LanguageBadge>
+          )
+        }
+      </h2>
+    )
+  }
+}
+
+class LanguageBadge extends React.Component {
+  render() {
+    return (
+      <Badge
+        className="m-1"
+        style={{
+          color: "white",
+          backgroundColor: colorHash(this.props.children)
+        }}
+      >
+        {this.props.children}
+      </Badge>
     )
   }
 }
@@ -124,11 +190,6 @@ class RepoCard extends React.Component {
   }
 
   render() {
-    function getColour(string) {
-      let hue = seedrandom(string).quick();
-      return convert.hsl.hex(hue * 360, 100, 50);
-    }
-
     return (
       <Card>
         <a href={this.props.repoData.html_url} className="text-reset">
@@ -139,33 +200,19 @@ class RepoCard extends React.Component {
             <img src={process.env.PUBLIC_URL + "/placeholder.png"} className="card-img-top" alt={this.props.repoData.name} />
           }
           <Card.Body>
-            <Card.Text>
-              <h6>{this.props.repoData.name}</h6>
-              <p>{this.props.repoData.description}</p>
-              <Badge
-                style={{
-                  color: "white",
-                  backgroundColor: "#" + getColour(this.props.repoData.language)
-                }}
-              >
-                {this.props.repoData.language}
-              </Badge>
-            </Card.Text>
+            <h6>{this.props.repoData.name}</h6>
+            <p>{this.props.repoData.description}</p>
+            <Badge
+              style={{
+                color: "white",
+                backgroundColor: colorHash(this.props.repoData.language)
+              }}
+            >
+              {this.props.repoData.language}
+            </Badge>
           </Card.Body>
         </a>
       </Card >
-    )
-  }
-}
-
-class Heading extends React.Component {
-  render() {
-    return (
-      <>
-        <div class="hr">
-          <hr data-content={this.props.children} class="hr-text" />
-        </div>
-      </>
     )
   }
 }
@@ -211,8 +258,13 @@ function App() {
       </header>
 
       <Container className="mb-5">
+
+        <Heading>My Skills</Heading>
+        <LanguageDisplay />
+
         <Heading>My Repositories</Heading>
         <RepoDisplay />
+
       </Container>
 
     </div>

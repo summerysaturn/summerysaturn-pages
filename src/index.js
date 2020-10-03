@@ -271,7 +271,7 @@ function App() {
         <Heading>Skills</Heading>
         <LanguageDisplay />
 
-        <Heading>Repositories</Heading>
+        <Heading>GitHub Repos</Heading>
         <RepoDisplay />
       </Container>
     </div>

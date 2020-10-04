@@ -262,7 +262,7 @@ function App() {
           </h1>
         </div>
 
-        <h4>Student, Developer, Artist</h4>
+        <h4>Student / Developer / Artist</h4>
 
         <SocialButtons />
       </header>

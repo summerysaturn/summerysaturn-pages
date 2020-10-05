@@ -86,21 +86,19 @@ class SocialButton extends React.Component {
 class DiscordButton extends React.Component {
   render() {
     return (
-      <>
-        <OverlayTrigger
-          placement="bottom"
-          trigger="click"
-          overlay={
-            <Tooltip>
-              <strong>lyla#1123</strong>
-            </Tooltip>
-          }
-        >
-          <div className="m-2 socialButton">
-            <FaDiscord />
-          </div>
-        </OverlayTrigger>
-      </>
+      <OverlayTrigger
+        placement="bottom"
+        trigger="click"
+        overlay={
+          <Tooltip>
+            <strong>lyla#1123</strong>
+          </Tooltip>
+        }
+      >
+        <div className="m-2 socialButton">
+          <FaDiscord />
+        </div>
+      </OverlayTrigger>
     );
   }
 }

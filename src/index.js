@@ -123,13 +123,13 @@ class LanguageDisplay extends React.Component {
       "Java",
       "C#",
       "Python",
-      "Lua",
-      "LÖVE",
+      "Lua & LÖVE2D",
       "JavaScript",
       "jQuery",
       "NodeJS",
       "ReactJS",
       "Unity3D",
+      "Google Cloud Platform",
     ];
   }
 

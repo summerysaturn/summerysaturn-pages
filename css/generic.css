@@ -1,5 +1,38 @@
-header {
-  width: 100vw;
-  height: 60vh;
-  background-image: linear-gradient(to bottom right, #e2eaf5, #b7cbe4);
+body {
+  overflow-x: hidden;
+}
+
+.testBox {
+  min-height: 40rem;
+  position: relative;
+}
+
+.bgbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -10000;
+}
+
+.fa {
+  height: 2rem;
+}
+
+.fadein {
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -26,146 +26,115 @@
           <ul class="navbar-nav" style="flex-direction: row">
             <li class="nav-item me-3">
               <a class="nav-link active" aria-current="page" href="#"
-                >Portfolio</a
+                >Repositories</a
               >
-            </li>
-            <li class="nav-item me-3">
-              <a class="nav-link" href="repos.html">Repositories</a>
-            </li>
-            <li class="nav-item me-3">
-              <a class="nav-link" href="#">Contact</a>
             </li>
           </ul>
         </div>
       </nav>
 
-      <div class="container mt-5 mb-5">
-        <h1 class="display-6">I Don't Know What to Put Here</h1>
-        <small>this is poggers?</small>
-      </div>
-
-      <div class="testBox w-100">
-        <div class="bgbox">
-          <div class="row h-100">
-            <div
-              class="col h-100 fadein"
-              style="
-                background-image: url('images/christian-wiediger-gVbOF8mdE3U-unsplash.jpg');
-                background-repeat: no-repeat;
-                background-size: cover;
-              "
-            ></div>
-            <div class="col h-100 fadein"></div>
-          </div>
+      <div class="container mt-5 mb-2">
+        <div class="mb-5">
+          <h1 class="display-6">Repositories</h1>
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col m-2"></div>
-            <div class="col m-2">
-              <h1 class="display-6">Did you know i'm cool</h1>
-              <p>i know me neither</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="testBox">
-        <div class="bgbox">
-          <div class="row h-100">
-            <div class="col h-100 fadein"></div>
-            <div
-              class="col h-100 fadein"
-              style="
-                background-image: url('images/kelly-sikkema-F7UonANW5LU-unsplash.jpg');
-                background-repeat: no-repeat;
-                background-size: cover;
-              "
-            ></div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col m-2">
-              <h1 class="display-6">Poggers tbh</h1>
-              <p>this is pretty pog</p>
-            </div>
-            <div class="col m-2"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testBox">
-        <div class="bgbox">
-          <div class="row h-100">
-            <div
-              class="col h-100 fadein"
-              style="
-                background-image: url('images/florian-olivo-4hbJ-eymZ1o-unsplash.jpg');
-                background-repeat: no-repeat;
-                background-size: cover;
-              "
-            ></div>
-            <div class="col h-100 fadein"></div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col m-2"></div>
-            <div class="col m-2">
-              <h1 class="display-6">Poggers tbh</h1>
-              <p>this is pretty pog</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testBox">
-        <div class="bgbox">
-          <div class="row h-100">
-            <div class="col h-100 fadein"></div>
-            <div
-              class="col h-100 fadein"
-              style="
-                background-image: url('images/kenny-leys-S32V9KV3ME8-unsplash.jpg');
-                background-repeat: no-repeat;
-                background-size: cover;
-              "
-            ></div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col m-2">
-              <h1 class="display-6">Poggers tbh</h1>
-              <p>this is pretty pog</p>
-            </div>
-            <div class="col m-2"></div>
-          </div>
-        </div>
+        <div class="row mt-4" id="box-target"></div>
       </div>
     </main>
 
-    <footer class="bg-dark text-light text-center">
+    <footer class="footer mt-auto py-3 bg-dark text-light text-center">
       <div class="container pb-4 pt-4">
         <a
           class="text-decoration-none text-light fs-3"
           href="https://twitter.com/summerysaturn"
         >
-          <i class="fa fa-twitter fadein" aria-hidden="true"></i>
+          <i class="fa fa-twitter fadein" alt="Twitter" aria-hidden="true"></i>
         </a>
         <a
           class="text-decoration-none text-light fs-3"
           href="https://github.com/summerysaturn"
         >
-          <i class="fa fa-github fadein" aria-hidden="true"></i>
+          <i class="fa fa-github fadein" alt="GitHub" aria-hidden="true"></i>
         </a>
         <a
           class="text-decoration-none text-light fs-3"
           href="https://ko-fi.com/summerysaturn"
         >
-          <i class="fa fa-coffee fadein" aria-hidden="true"></i>
+          <i class="fa fa-coffee fadein" alt="Ko-Fi" aria-hidden="true"></i>
         </a>
         <p>Copyright &copy; Charlotte 'Lily' Ward 2020-2021</p>
       </div>
     </footer>
   </body>
+
+  <script>
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://api.github.com/users/summerysaturn/repos");
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        let response = JSON.parse(xhr.responseText);
+        displayRepos(response);
+      } else {
+        console.log("couldn't fetch repos! " + xhr.status);
+      }
+    };
+    xhr.send();
+
+    function displayRepos(json) {
+      document.getElementById("box-target").innerHTML = "";
+      json.forEach((element) => {
+        let repoLink = element.html_url;
+        let imageLink;
+        let name = element.name;
+        let description = element.description;
+        let language = element.language;
+
+        let license;
+        if (element.license != null) {
+          license = element.license.name;
+        } else {
+          license = "Unlicensed";
+        }
+
+        if (name === "summerysaturn") {
+          return;
+        }
+
+        heldImages = [
+          "5e-strife",
+          "archive",
+          "countdown-applet",
+          "FaceFillers-Electron",
+          "lily-dotfiles",
+          "luna-superpi-discord",
+          "playground",
+          "recipe-book-core",
+          "summerysaturn.github.io",
+          "y1-university",
+        ];
+        let imageTag = "";
+        if (heldImages.indexOf(name) > -1) {
+          // Image found!
+          imageTag = `<img src="images/repo/${name}.png" class="card-img-top" alt="" />`;
+        } else {
+          imageTag = `<img src="images/repo/placeholder.png" class="card-img-top" alt="" />`;
+        }
+
+        document.getElementById("box-target").innerHTML += `
+          <div class="col-6 col-md-4 mb-4 fadein">
+            <a class="text-decoration-none text-dark" href="${repoLink}">
+              <div class="card h-100">
+                ${imageTag}
+                <div class="card-body">
+                  <h5 class="card-title">${name}</h5>
+                  <p class="card-text">${description}</p>
+                  <span class="badge rounded-pill bg-primary">${language}</span>
+                  <span class="badge rounded-pill bg-info">${license}</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        `;
+      });
+    }
+  </script>
 </html>

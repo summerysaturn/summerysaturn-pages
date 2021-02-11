@@ -28,6 +28,11 @@ body {
   -ms-animation: fadeIn ease 1s;
 }
 
+nav img {
+  height: 2rem;
+  width: 2rem;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;

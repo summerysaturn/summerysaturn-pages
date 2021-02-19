@@ -2,35 +2,31 @@ body {
   overflow-x: hidden;
 }
 
-.testBox {
-  min-height: 40rem;
-  position: relative;
+.container,
+.container-fluid,
+.container-xxl,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
+  padding: 0 !important;
 }
 
-.bgbox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -10000;
+.bg-gradient-primary-lr {
+  background: rgb(45, 45, 209);
+  background: linear-gradient(
+    135deg,
+    rgba(45, 45, 209, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 
-.fa {
+.repo-img .fa-icon {
   height: 2rem;
 }
 
 .fadein {
   animation: fadeIn ease 1s;
-  -webkit-animation: fadeIn ease 1s;
-  -moz-animation: fadeIn ease 1s;
-  -o-animation: fadeIn ease 1s;
-  -ms-animation: fadeIn ease 1s;
-}
-
-nav img {
-  height: 2rem;
-  width: 2rem;
 }
 
 @keyframes fadeIn {
@@ -40,4 +36,21 @@ nav img {
   100% {
     opacity: 1;
   }
+}
+
+.img-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 50%;
+}
+
+.img-wrapper img {
+  position: absolute;
+  top: 0;
+}
+
+.card-footer-unstyle {
+  padding: 1rem 0.5rem !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  border-top: none !important;
 }

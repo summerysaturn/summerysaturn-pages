@@ -17,6 +17,11 @@ body {
   background: linear-gradient(135deg, #2d7cd1 0%, #00ff95 100%);
 }
 
+.bg-gradient-primary-rl {
+  background: #2d7cd1;
+  background: linear-gradient(45deg, #2d7cd1 0%, #00ff95 100%);
+}
+
 .repo-img .fa-icon {
   height: 2rem;
 }
@@ -60,6 +65,11 @@ body {
   border-radius: 0.25rem 0 0 0.25rem !important;
 }
 
+.account-image-solo {
+  height: 16rem;
+  border-radius: 50% !important;
+}
+
 @media (max-width: 575.98px) {
   .account-flex {
     flex-direction: column;
@@ -77,4 +87,15 @@ body {
   .account-image {
     height: 12rem;
   }
+}
+
+hr {
+  border-top: 0;
+  height: 4px !important;
+  border-radius: 0.25rem !important;
+  opacity: 1 !important;
+}
+
+.dash-list li::marker {
+  content: "- ";
 }

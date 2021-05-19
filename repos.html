@@ -2,6 +2,8 @@
 <html class="h-100" lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>summerysaturn</title>
     <link href="css/generic.css" rel="stylesheet" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
@@ -15,29 +17,89 @@
       crossorigin="anonymous"
     ></script>
 
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="images/site.webmanifest" />
+
     <script src="https://use.fontawesome.com/749a0c83f8.js"></script>
   </head>
 
-  <body class="d-flex flex-column h-100">
-    <main class="flex-grow-0">
-      <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="#">Charlotte 'Lily' Ward</a>
-          <ul class="navbar-nav" style="flex-direction: row">
-            <li class="nav-item me-3">
-              <a class="nav-link" href="index.html">Portfolio</a>
-            </li>
-            <li class="nav-item me-3">
-              <a class="nav-link active" aria-current="page" href="#"
-                >Repositories</a
-              >
-            </li>
-            <li class="nav-item me-3">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
-          </ul>
-        </div>
+  <body class="d-flex flex-column h-100 bg-light">
+    <div class="container bg-body mb-3 rounded-3 rounded-bottom">
+      <nav class="navbar navbar-light bg-body w-100 ps-5 pe-5">
+        <a class="navbar-brand" href="#"> Charlotte Ward </a>
+        <ul class="nav nav-pills">
+          <li class="nav-item me-3">
+            <a type="button" class="btn btn-dark active" href="index.html"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item dropdown me-3">
+            <button
+              type="button"
+              class="btn btn-dark dropdown-toggle dropdown-toggle-split"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Repositories
+            </button>
+            <ul
+              class="
+                dropdown-menu dropdown-menu-dark
+                bg-dark
+                dropdown-menu-lg-end
+              "
+            >
+              <li>
+                <a class="dropdown-item" href="#"> Overview </a>
+              </li>
+              <li><h6 class="dropdown-header">Standout Pages</h6></li>
+              <li>
+                <a class="dropdown-item" href="y1-university/index.html">
+                  y1-university
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!--
+          <li class="nav-item me-3">
+            <a class="nav-link text-dark" href="#">Contact</a>
+          </li>
+          -->
+        </ul>
       </nav>
+
+      <div class="p-5 bg-gradient-primary-lr text-white pb-3">
+        <div class="mb-5">
+          <h1 class="display-2 ms-3">Repositories</h1>
+        </div>
+      </div>
+
+      <div class="p-5 pt-3">
+        <div class="row row-cols-1 mt-4" id="card-target"></div>
+      </div>
+    </div>
+
+    <!--
+    <main class="flex-grow-0">
+
+
+
 
       <div class="container mt-5 mb-2">
         <div class="mb-5">
@@ -45,102 +107,142 @@
         </div>
         <div class="row mt-4" id="box-target"></div>
       </div>
-    </main>
 
-    <footer class="footer mt-auto py-3 bg-dark text-light text-center">
-      <div class="container pb-4 pt-4">
+    </main>
+    -->
+
+    <footer class="footer mt-auto py-3 text-dark text-center">
+      <div class="container">
         <a
-          class="text-decoration-none text-light fs-3"
+          class="text-decoration-none text-dark fs-3"
           href="https://twitter.com/summerysaturn"
         >
-          <i class="fa fa-twitter fadein" alt="Twitter" aria-hidden="true"></i>
+          <i
+            class="fa-icon fa fa-twitter fadein"
+            alt="Twitter"
+            aria-hidden="true"
+          ></i>
         </a>
         <a
-          class="text-decoration-none text-light fs-3"
+          class="text-decoration-none text-dark fs-3"
           href="https://github.com/summerysaturn"
         >
-          <i class="fa fa-github fadein" alt="GitHub" aria-hidden="true"></i>
+          <i
+            class="fa-icon fa fa-github fadein"
+            alt="GitHub"
+            aria-hidden="true"
+          ></i>
         </a>
         <a
-          class="text-decoration-none text-light fs-3"
+          class="text-decoration-none text-dark fs-3"
           href="https://ko-fi.com/summerysaturn"
         >
-          <i class="fa fa-coffee fadein" alt="Ko-Fi" aria-hidden="true"></i>
+          <i
+            class="fa-icon fa fa-coffee fadein"
+            alt="Ko-Fi"
+            aria-hidden="true"
+          ></i>
         </a>
-        <p>Copyright &copy; Charlotte 'Lily' Ward 2020-2021</p>
+        <p>Copyright &copy; Charlotte Ward 2020-2021</p>
       </div>
     </footer>
   </body>
 
+  <!-- todo: move this to another file -->
   <script>
+    // simple ajax-like get request for repos on my account
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "https://api.github.com/users/summerysaturn/repos");
     xhr.onload = function () {
       if (xhr.status === 200) {
         let response = JSON.parse(xhr.responseText);
-        displayRepos(response);
+        // display the repos using the function below
+        displayData(response);
       } else {
-        console.log("couldn't fetch repos! " + xhr.status);
+        console.error("couldn't fetch repos! status error: " + xhr.status);
       }
     };
     xhr.send();
 
-    function displayRepos(json) {
-      document.getElementById("box-target").innerHTML = "";
-      json.forEach((element) => {
+    function displayData(response) {
+      // clear existing box-target
+      document.getElementById("card-target").innerHTML = "";
+
+      // state data for repos we know about
+      const heldStates = [
+        { name: "5e-strife", status: "Development", image: true },
+        { name: "archive", status: "Archive", image: true },
+        { name: "countdown-applet", status: "Archive", image: true },
+        { name: "FaceFillers-Electron", status: "Archive", image: true },
+        { name: "char-dotfiles", status: "Maintenance", image: true },
+        { name: "luna-superpi-discord", status: "Development", image: true },
+        { name: "playground", status: "Development", image: true },
+        { name: "recipe-book-core", status: "Maintenance", image: true },
+        { name: "summerysaturn.github.io", status: "Development", image: true },
+        { name: "y1-410A2-UnityProject", status: "Development", image: true },
+        { name: "y1-university", status: "Development", image: true },
+      ];
+
+      // iterate over each repo in the json response. see api.github.com docs.
+      response.forEach((element) => {
         let repoLink = element.html_url;
-        let imageLink;
         let name = element.name;
         let description = element.description;
         let language = element.language;
+        let status = "Unknown";
 
-        let license;
+        let license = "Unlicensed";
         if (element.license != null) {
           license = element.license.name;
-        } else {
-          license = "Unlicensed";
         }
 
+        // get rid of my tiny and near-pointless github description repo
         if (name === "summerysaturn") {
           return;
         }
 
-        heldImages = [
-          "5e-strife",
-          "archive",
-          "countdown-applet",
-          "FaceFillers-Electron",
-          "lily-dotfiles",
-          "luna-superpi-discord",
-          "playground",
-          "recipe-book-core",
-          "summerysaturn.github.io",
-          "y1-university",
-        ];
-        let imageTag = "";
-        if (heldImages.indexOf(name) > -1) {
-          // Image found!
-          imageTag = `<img src="images/repo/${name}.png" class="card-img-top" alt="" />`;
-        } else {
-          imageTag = `<img src="images/repo/placeholder.png" class="card-img-top" alt="" />`;
-        }
+        /* we actually have some repo images saved on the host! github have
+         *  yet to implement a way to fetch the social slide for a repo, even
+         *  though repos can have images. the API just doesn't support it, for
+         *  some reason. instead, i'm hosting them here and matching them.
+         */
+        let imageSrc = `placeholder.png`;
 
-        document.getElementById("box-target").innerHTML += `
-          <div class="col-6 col-md-4 mb-4 fadein">
-            <a class="text-decoration-none text-dark" href="${repoLink}">
-              <div class="card h-100">
-                ${imageTag}
-                <div class="card-body">
+        heldStates.some((e) => {
+          if (e.name == name && e.status) {
+            status = `${e.status}`;
+          }
+          if (e.name == name && e.image) {
+            imageSrc = `${name}.png`;
+          }
+        });
+
+        // insert all found repos using this html prefab
+        document.getElementById("card-target").innerHTML += `
+          <div class="col-12 col-sm-6 col-lg-4 mb-4 fadein">
+            <a class="text-decoration-none" href="${repoLink}">
+              <div class="card h-100 border-0 bg-light text-dark">
+                <div class="img-wrapper">
+                  <img src="images/repo/${imageSrc}" class="card-img-top fadein" alt="" />
+                </div>
+                <div class="card-body pb-0">
                   <h5 class="card-title">${name}</h5>
                   <p class="card-text">${description}</p>
-                  <span class="badge rounded-pill bg-primary">${language}</span>
-                  <span class="badge rounded-pill bg-info">${license}</span>
+                </div>
+                <div class="card-footer card-footer-unstyle">
+                  <span class="badge text-dark">${language}</span> &middot;
+                  <span class="badge text-dark">${license}</span> &middot;
+                  <span class="badge text-dark">${status}</span>
                 </div>
               </div>
             </a>
           </div>
         `;
       });
+
+      document.getElementById("img-target").innerHTML += `
+          <img src="${response[0].owner.avatar_url}" alt="..." class="fadein account-image" />
+        `;
     }
   </script>
 </html>

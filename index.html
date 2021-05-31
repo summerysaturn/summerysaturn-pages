@@ -64,10 +64,7 @@
               "
             >
               <li>
-                <a class="dropdown-item" href="repos.html"> Overview </a>
-              </li>
-              <li><h6 class="dropdown-header">Specific Pages</h6></li>
-              <li>
+                <h6 class="dropdown-header">Standout Pages</h6>
                 <a class="dropdown-item" href="y1-university/index.html">
                   y1-university
                 </a>
@@ -132,102 +129,37 @@
           </div>
         </div>
 
-        <p>Contact information is available upon request:</p>
         <a type="button" class="btn btn-dark" href="mailto:char73@pm.me"
           >Send an Email</a
         >
       </div>
 
-      <div class="row">
-        <div class="col">
-          <div class="p-5 pt-3 pb-0"><h2>Skills</h2></div>
-
-          <div class="pe-3 ps-3">
-            <hr class="bg-light" />
-          </div>
-
-          <div class="p-5 pt-3">
-            <p class="fw-bold">Use Regularly</p>
-            <ul class="dash-list">
-              <li>Git & GitHub</li>
-              <li>*nix Administration</li>
-              <li>Python</li>
-              <li>TypeScript</li>
-              <li>Node.JS</li>
-              <li>jQuery</li>
-              <li>Java</li>
-              <li>.NET</li>
-              <li>LaTeX</li>
-              <li>Unity3D</li>
-            </ul>
-
-            <p class="fw-bold">Learning</p>
-            <ul class="dash-list">
-              <li>Rust</li>
-              <li>Lua & LÖVE2D</li>
-              <li>Ruby</li>
-              <li>C/C++</li>
-              <li>Svelte</li>
-              <li>Electron</li>
-              <li>React</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="p-5 pt-3 pb-0"><h2>Education</h2></div>
-
-          <div class="pe-3 ps-3">
-            <hr class="bg-light" />
-          </div>
-
-          <div class="p-5 pt-3 mb-1">
-            <p class="fw-bold">GCSEs (2012 - 2015)</p>
-            <p class="ms-4">
-              9 GCSEs A* to C, and <br />
-              6 GCSEs A* to A
-            </p>
-
-            <p class="fw-bold mb-1">A-Levels (2016 - 2017)</p>
-            <p class="ms-4">
-              Computing: C <br />
-              Photography: B
-            </p>
-
-            <p class="fw-bold mb-1">Higher National Certificate (2018)</p>
-            <p class="ms-4">
-              Photography <br />
-              Unfinished for medical reasons
-            </p>
-
-            <p class="fw-bold mb-1">Higher National Certificate (2019)</p>
-            <a
-              type="button"
-              class="btn btn-dark ms-4"
-              href="https://github.com/summerysaturn/archive/tree/master/college-work-archive"
-              >Work Archive</a
-            >
-            <p class="ms-4">
-              Computer Science <br />
-              Pass
-            </p>
-
-            <p class="fw-bold mb-1">
-              Bachelors of Science (Hons) (2020 - Ongoing)
-            </p>
-            <a
-              type="button"
-              class="btn btn-dark ms-4"
-              href="y1-university/index.html"
-              >Work Overview</a
-            >
-            <p class="ms-4">
-              Computer Science for Games <br />
-              University of Brighton
-            </p>
-          </div>
+      <div class="p-5 bg-gradient-primary-lr text-white pb-3">
+        <div class="mb-5">
+          <h1 class="display-2 ms-3">Repositories</h1>
         </div>
       </div>
+
+      <div class="p-5 pt-3">
+        <div class="row row-cols-1 mt-4" id="card-target"></div>
+      </div>
     </div>
+
+    <!--
+    <main class="flex-grow-0">
+
+
+
+
+      <div class="container mt-5 mb-2">
+        <div class="mb-5">
+          <h1 class="display-6">Repositories</h1>
+        </div>
+        <div class="row mt-4" id="box-target"></div>
+      </div>
+
+    </main>
+    -->
 
     <footer class="footer mt-auto py-3 text-dark text-center">
       <div class="container">
@@ -283,7 +215,80 @@
     xhr.send();
 
     function displayData(response) {
-      // grab profile pic from first repo. see api.github.com docs.
+      // clear existing box-target
+      document.getElementById("card-target").innerHTML = "";
+
+      // state data for repos we know about
+      const heldStates = [
+        { name: "5e-strife", status: "Development", image: true },
+        { name: "archive", status: "Archive", image: true },
+        { name: "countdown-applet", status: "Archive", image: true },
+        { name: "FaceFillers-Electron", status: "Archive", image: true },
+        { name: "char-dotfiles", status: "Maintenance", image: true },
+        { name: "luna-superpi-discord", status: "Development", image: true },
+        { name: "playground", status: "Development", image: true },
+        { name: "recipe-book-core", status: "Maintenance", image: true },
+        { name: "summerysaturn.github.io", status: "Development", image: true },
+        { name: "y1-410A2-UnityProject", status: "Development", image: true },
+        { name: "y1-university", status: "Development", image: true },
+      ];
+
+      // iterate over each repo in the json response. see api.github.com docs.
+      response.forEach((element) => {
+        let repoLink = element.html_url;
+        let name = element.name;
+        let description = element.description;
+        let language = element.language;
+        let status = "Unknown";
+
+        let license = "Unlicensed";
+        if (element.license != null) {
+          license = element.license.name;
+        }
+
+        // get rid of my tiny and near-pointless github description repo
+        if (name === "summerysaturn") {
+          return;
+        }
+
+        /* we actually have some repo images saved on the host! github have
+         *  yet to implement a way to fetch the social slide for a repo, even
+         *  though repos can have images. the API just doesn't support it, for
+         *  some reason. instead, i'm hosting them here and matching them.
+         */
+        let imageSrc = `placeholder.png`;
+
+        heldStates.some((e) => {
+          if (e.name == name && e.status) {
+            status = `${e.status}`;
+          }
+          if (e.name == name && e.image) {
+            imageSrc = `${name}.png`;
+          }
+        });
+
+        // insert all found repos using this html prefab
+        document.getElementById("card-target").innerHTML += `
+          <div class="col-12 col-sm-6 col-lg-4 mb-4 fadein">
+            <a class="text-decoration-none" href="${repoLink}">
+              <div class="card h-100 border-0 bg-light text-dark">
+                <div class="img-wrapper">
+                  <img src="images/repo/${imageSrc}" class="card-img-top fadein" alt="" />
+                </div>
+                <div class="card-body pb-0">
+                  <h5 class="card-title">${name}</h5>
+                  <p class="card-text">${description}</p>
+                </div>
+                <div class="card-footer card-footer-unstyle">
+                  <span class="badge text-dark">${language}</span> &middot;
+                  <span class="badge text-dark">${license}</span> &middot;
+                  <span class="badge text-dark">${status}</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        `;
+      });
 
       document.getElementById("img-target").innerHTML += `
           <img src="${response[0].owner.avatar_url}" alt="..." class="fadein account-image-solo" />
